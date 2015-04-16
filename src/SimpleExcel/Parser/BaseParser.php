@@ -174,9 +174,9 @@ abstract class BaseParser implements IParser
             throw new \Exception('File '.$file_path.' doesn\'t exist', SimpleExcelException::FILE_NOT_FOUND);
         
         // extension valid?
-        } else if (strtoupper(pathinfo($file_path, PATHINFO_EXTENSION))!= strtoupper($this->file_extension)){
+        //} else if (strtoupper(pathinfo($file_path, PATHINFO_EXTENSION))!= strtoupper($this->file_extension)){
 
-            throw new \Exception('File extension '.$this->file_extension.' doesn\'t match with '.$this->file_extension, SimpleExcelException::FILE_EXTENSION_MISMATCH);
+        //    throw new \Exception('File extension '.$this->file_extension.' doesn\'t match with '.$this->file_extension, SimpleExcelException::FILE_EXTENSION_MISMATCH);
         
         // file readable?
         } else if (($handle = fopen($file_path, 'r')) === FALSE) {            
