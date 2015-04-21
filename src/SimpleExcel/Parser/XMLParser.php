@@ -21,6 +21,22 @@ class XMLParser extends BaseParser implements IParser
     protected $file_extension = 'xml';
 
     /**
+     * temporary set error_reporting to Errors only
+     * @var int
+     */
+    private $error_reporting_err_only;
+    private $error_reporting_saved;
+    /**
+     * @param    string  $file_url   Path to file (optional)
+     */
+    public function __construct($file_url = NULL) {
+        parent::__construct();
+        $this->error_reporting_err_only = E_ALL & ~E_NOTICE & ~E_WARNING;
+        $this->error_reporting_saved = error_reporting();
+    }
+
+
+    /**
     * Extract attributes from SimpleXMLElement object
     * 
     * @access   private
@@ -190,7 +206,7 @@ class XMLParser extends BaseParser implements IParser
      * @return bool
     */
     private function parseDOM($xml){
-    
+        error_reporting($this->error_reporting_err_only);
         // get XML namespace
         $xmlns = $xml->getDocNamespaces();
 
@@ -290,7 +306,7 @@ class XMLParser extends BaseParser implements IParser
             ));
             $row_num += 1;
         }
-
+        error_reporting($this->error_reporting_saved);
         return true;
     }
     
